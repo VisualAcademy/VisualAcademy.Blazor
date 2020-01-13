@@ -1,0 +1,24 @@
+﻿@page "/Components/MatButtons"
+<!-- Page Heading -->
+<h1 class="h3 mb-4 text-gray-800">MatButtons</h1>
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <MatButton Raised="true">Raised</MatButton>
+        <MatButton Unelevated="true">Unelevated</MatButton>
+        <MatButton Outlined="true">Outlined</MatButton>
+        <MatButton Dense="true">Dense</MatButton>
+    </div>
+
+    <div class="col-lg-12">
+        <MatTextField Label="이름" @bind-Value="@name"></MatTextField>
+        <hr />
+        <span>@name</span>
+    </div>
+
+</div>
+
+@code {
+    private string name = "";
+}
