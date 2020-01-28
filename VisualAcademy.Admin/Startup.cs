@@ -17,6 +17,7 @@ using VisualAcademy.Admin.Areas.Identity;
 using VisualAcademy.Admin.Data;
 using System.Net.Http;
 using VisualAcademy.Admin.Services;
+using VisualAcademy.Models;
 
 namespace VisualAcademy.Admin
 {
@@ -45,6 +46,15 @@ namespace VisualAcademy.Admin
 
             services.AddScoped<HttpClient>(); // MatBlazor
             services.AddScoped<IFileUploadService, FileUploadService>();
+
+            AddDependencyInjectionContainerForIdeaAppCore(services); // Ideas
+        }
+
+        private void AddDependencyInjectionContainerForIdeaAppCore(IServiceCollection services)
+        {
+            services.AddEntityFrameworkSqlServer().AddDbContext<IdeaDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
+            services.AddTransient<IIdeaRepository, IdeaRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
