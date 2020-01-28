@@ -20,6 +20,7 @@ using VisualAcademy.Admin.Services;
 using VisualAcademy.Models;
 using VideoAppCore.Models;
 using ManufacturerAppCore.Models;
+using MachineApp.Models;
 
 namespace VisualAcademy.Admin
 {
@@ -61,8 +62,18 @@ namespace VisualAcademy.Admin
             // DI Containerø° ¡÷¿‘ 
             services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
             // ============================================================================== // 
+
+            AddDependencyInjectionContainerForMachines(services);
         }
 
+        private void AddDependencyInjectionContainerForMachines(IServiceCollection services)
+        {
+            services.AddEntityFrameworkSqlServer().AddDbContext<MachineDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IMachineRepository, MachineRepository>();
+            services.AddScoped<IMediaRepository, MediaRepository>();
+            //services.AddScoped<IMachineMediaRepository, IMachineMediaRepository>();
+        }
         private void AddDependencyInjectionContainerForIdeaAppCore(IServiceCollection services)
         {
             services.AddEntityFrameworkSqlServer().AddDbContext<IdeaDbContext>(options =>

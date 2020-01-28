@@ -61,11 +61,15 @@
     <Folder Include="dbo\Tables\Ideas" />
     <Folder Include="dbo\Tables\Videos" />
     <Folder Include="dbo\Tables\Manufacturers" />
+    <Folder Include="dbo\Tables\Machines" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Ideas\Ideas.sql" />
     <Build Include="dbo\Tables\Videos\Videos.sql" />
     <Build Include="dbo\Tables\Manufacturers\Manufacturers.sql" />
+    <Build Include="dbo\Tables\Machines\Machines.sql" />
+    <Build Include="dbo\Tables\Machines\MachinesMedias.sql" />
+    <Build Include="dbo\Tables\Machines\Medias.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="VisualAcademy.SqlServer.publish.xml" />
