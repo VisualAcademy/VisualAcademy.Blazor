@@ -86,6 +86,7 @@
                         <h6 class="collapse-header">Database Samples:</h6>
                         <a class="collapse-item" href="/Ideas">Ideas</a>
                         <a class="collapse-item" href="/Videos">Videos</a>
+                        <a class="collapse-item" href="/Manufacturers">Manufacturers</a>
                     </div>
                 </div>
             </li>
@@ -422,5 +423,20 @@
 
     <!-- This is the glue between the C# code and the ChartJs charts -->
     <script src="_content/ChartJs.Blazor/ChartJsBlazorInterop.js" type="text/javascript" language="javascript"></script>
+
+    @*<script src="/lib/jquery.js"></script>
+    <script src="/lib/dist/js/bootstrap.js"></script>*@
+
+    <script>
+        // 넘어온 ID를 갖는 모달 창 닫기
+        function closeModal(modalId) {
+            //console.log("삭제");
+            $("#" + modalId).modal('hide');
+        }
+        // 넘어온 ID를 갖는 모달 창 열기
+        function showModal(modalId) {
+            $("#" + modalId).modal('show');
+        }
+    </script>
 </body>
 </html>

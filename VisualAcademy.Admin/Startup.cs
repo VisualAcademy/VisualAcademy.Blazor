@@ -19,6 +19,7 @@ using System.Net.Http;
 using VisualAcademy.Admin.Services;
 using VisualAcademy.Models;
 using VideoAppCore.Models;
+using ManufacturerAppCore.Models;
 
 namespace VisualAcademy.Admin
 {
@@ -50,6 +51,16 @@ namespace VisualAcademy.Admin
 
             AddDependencyInjectionContainerForIdeaAppCore(services); // Ideas
             AddDependencyInjectionContainerForVideoAppCore(services); // Videos
+
+            // ============================================================================== // 
+            // 새로운 DbContext 추가
+            services.AddEntityFrameworkSqlServer().AddDbContext<ManufacturerDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
+            // DI Container에 주입 
+            services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
+            // ============================================================================== // 
         }
 
         private void AddDependencyInjectionContainerForIdeaAppCore(IServiceCollection services)

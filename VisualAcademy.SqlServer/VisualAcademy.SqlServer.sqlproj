@@ -60,10 +60,12 @@
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\Tables\Ideas" />
     <Folder Include="dbo\Tables\Videos" />
+    <Folder Include="dbo\Tables\Manufacturers" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Ideas\Ideas.sql" />
     <Build Include="dbo\Tables\Videos\Videos.sql" />
+    <Build Include="dbo\Tables\Manufacturers\Manufacturers.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="VisualAcademy.SqlServer.publish.xml" />

@@ -1,7 +1,7 @@
 ﻿@using Dul.Web
 
-<input type="button" name="name" value="2번" @onclick="@(() => PagerButtonClicked(2))" />
-<input type="button" name="name" value="3번" @onclick="@(() => PagerButtonClicked(3))" />
+<input type="button" name="name" value="2번" @onclick="PagerButtonClicked(2)" />
+<input type="button" name="name" value="3번" @onclick="PagerButtonClicked(3)" />
 
 <ul class="pagination pagination-sm">
     @*처음 링크*@
@@ -78,7 +78,7 @@
             if (Model.SearchMode)
             {
                 <li class="page-item">
-                    <a href="@Model.Url/Page/@i&SearchField=@Model.SearchField&SearchQuery=@Model.SearchQuery" class="page-link" @onclick="@(() => PagerButtonClicked(i))">
+                    <a href="@Model.Url/Page/@i&SearchField=@Model.SearchField&SearchQuery=@Model.SearchQuery" class="page-link" @onclick="PagerButtonClicked(i)">
                         @i
                     </a>
                 </li>
@@ -86,7 +86,7 @@
             else
             {
                 <li class="page-item">
-                    <a href="@Model.Url/Page/@i" class="page-link" @onclick="@(() => PagerButtonClicked(i))">
+                    <a href="@Model.Url/Page/@i" class="page-link" @onclick="PagerButtonClicked(i)">
                         @i
                     </a>
                 </li>

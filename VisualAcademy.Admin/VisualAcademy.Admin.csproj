@@ -15,6 +15,8 @@
 
   <ItemGroup>
     <PackageReference Include="ChartJs.Blazor" Version="1.0.3" />
+    <PackageReference Include="Dul" Version="1.2.1" />
+    <PackageReference Include="DulPager" Version="1.0.0" />
     <PackageReference Include="MatBlazor" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
@@ -25,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorInputFile\BlazorInputFile.csproj" />
-    <ProjectReference Include="..\Dul.Components\Dul.Components.csproj" />
     <ProjectReference Include="..\VisualAcademy.Models\VisualAcademy.Models.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,5 @@
 ﻿@page "/DulPagerTest"
 @page "/DulPagerTest/Page/{Page}"
-@using Dul.Components
-@using Dul.Web
 
 @inject NavigationManager NavigationManager
 
@@ -10,10 +8,11 @@
 페이지: @Page
 <hr />
 
-<DulPager Model="pager" PageChanged="@PagerPageChanged"></DulPager>
+@*<DulPager Model="pager" PageChanged="@PagerPageChanged"></DulPager>*@
+<DulPager.DulPagerComponent  Model="pager" PageIndexChanged="@PagerPageChanged"></DulPager.DulPagerComponent>
 
 @code {
-    PagerBase pager = new PagerBase() 
+    DulPager.DulPagerBase pager = new DulPager.DulPagerBase() 
     { 
         RecordCount = 25,
         PageNumber = 2, 
