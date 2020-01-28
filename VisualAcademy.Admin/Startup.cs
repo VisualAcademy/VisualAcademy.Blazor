@@ -18,6 +18,7 @@ using VisualAcademy.Admin.Data;
 using System.Net.Http;
 using VisualAcademy.Admin.Services;
 using VisualAcademy.Models;
+using VideoAppCore.Models;
 
 namespace VisualAcademy.Admin
 {
@@ -48,6 +49,7 @@ namespace VisualAcademy.Admin
             services.AddScoped<IFileUploadService, FileUploadService>();
 
             AddDependencyInjectionContainerForIdeaAppCore(services); // Ideas
+            AddDependencyInjectionContainerForVideoAppCore(services); // Videos
         }
 
         private void AddDependencyInjectionContainerForIdeaAppCore(IServiceCollection services)
@@ -55,6 +57,19 @@ namespace VisualAcademy.Admin
             services.AddEntityFrameworkSqlServer().AddDbContext<IdeaDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
             services.AddTransient<IIdeaRepository, IdeaRepository>();
+        }
+
+        private void AddDependencyInjectionContainerForVideoAppCore(IServiceCollection services)
+        {
+            // 새로운 DbContext 클래스 등록
+            services.AddEntityFrameworkSqlServer().AddDbContext<VideoDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
+            // DI Container에 서비스 등록
+            //services.AddTransient<IVideoRepositoryAsync, VideoRepositoryEfCoreAsync>();
+            //services.AddSingleton<IVideoRepositoryAsync>(new VideoRepositoryAdoNetAsync(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSingleton<IVideoRepositoryAsync>(new VideoRepositoryDapperAsync(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
