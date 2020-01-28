@@ -335,7 +335,7 @@
 
           //
           document.getElementById("txtSignature").value = this.toDataURL();
-          DotNet.invokeMethodAsync("BlazorApp", "GetImageDataAsync", this.toDataURL());
+          DotNet.invokeMethodAsync("VisualAcademy.Admin", "GetImageDataAsync", this.toDataURL());
           //
       };
       SignaturePad.prototype._handlePointerEvents = function () {
