@@ -24,6 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorInputFile\BlazorInputFile.csproj" />
+    <ProjectReference Include="..\Dul.Components\Dul.Components.csproj" />
     <ProjectReference Include="..\VisualAcademy.Models\VisualAcademy.Models.csproj" />
   </ItemGroup>
 

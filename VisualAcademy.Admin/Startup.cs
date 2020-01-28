@@ -15,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VisualAcademy.Admin.Areas.Identity;
 using VisualAcademy.Admin.Data;
+using System.Net.Http;
+using VisualAcademy.Admin.Services;
 
 namespace VisualAcademy.Admin
 {
@@ -40,6 +42,9 @@ namespace VisualAcademy.Admin
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddSingleton<WeatherForecastService>();
+
+            services.AddScoped<HttpClient>(); // MatBlazor
+            services.AddScoped<IFileUploadService, FileUploadService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
