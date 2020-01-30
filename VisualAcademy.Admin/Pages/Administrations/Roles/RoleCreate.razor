@@ -1,0 +1,27 @@
+﻿@page "/Administrations/Roles/RoleCreate"
+
+<h3>Create Role</h3>
+
+<EditForm Model="CreateRoleViewModelRef" OnValidSubmit="HandleCreation">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    <p>
+        <label>
+            Role Name:
+            <InputText @bind-Value="CreateRoleViewModelRef.RoleName" />
+        </label>
+        <ValidationMessage For="@(() => CreateRoleViewModelRef.RoleName)"></ValidationMessage>
+    </p>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+@if (ErrorMessages?.Count > 0)
+{
+    <ul>
+        @foreach (var error in ErrorMessages)
+        {
+            <li>@error</li>
+        }
+    </ul>
+}

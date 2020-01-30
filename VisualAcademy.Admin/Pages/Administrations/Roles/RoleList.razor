@@ -1,0 +1,56 @@
+﻿@page "/Administrations/Roles"
+
+<h3>Role List</h3>
+
+<a href="/Administrations/Roles/RoleCreate">Create</a>
+
+<div class="row">
+    <div class="col-md-12">
+        @if (models == null)
+        {
+            <div>
+                <p>
+                    <MatProgressBar Indeterminate="true"></MatProgressBar>
+                </p>
+            </div>
+        }
+        else
+        {
+            <table class="table table-bordered table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                @if (models.Count == 0)
+                {
+                    <tbody>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <p>데이터가 없습니다.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+                <tbody>
+                    @foreach (var m in models)
+                    {
+                        <tr>
+                            <td>@m.Id</td>
+                            <td>
+                                <a href="/Uploads/Details/@m.Id">@m.Name</a>
+                            </td>
+                            <td>
+                                <a href="/Uploads/Details/@m.Id" class="btn btn-light">Details</a>
+                                <a href="/Uploads/Edit/@m.Id" class="btn btn-light">Edit</a>
+                                <a href="/Uploads/Delete/@m.Id" class="btn btn-light">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
