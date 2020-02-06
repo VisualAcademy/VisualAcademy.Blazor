@@ -1,32 +1,86 @@
-﻿<div class="month">
-    <ul>
-        <li class="prev">&#10094;</li>
-        <li class="next">&#10095;</li>
-        <li>August<br><span style="font-size:18px">2017</span></li>
+﻿@{
+    int count = 1;
+}
+
+<div class="dulcalendar">
+    <div class="month">
+        <ul>
+            <li class="prev" @onclick="PrevMonth" style="cursor: pointer;">&#10094;</li>
+            <li class="next" @onclick="NextMonth" style="cursor: pointer;">&#10095;</li>
+            <li>@SelectedData.ToString("yyyy년 MM월")</li>
+        </ul>
+    </div>
+    <ul class="weekdays">
+        <li>Su</li>
+        <li>Mo</li>
+        <li>Tu</li>
+        <li>We</li>
+        <li>Th</li>
+        <li>Fr</li>
+        <li>Sa</li>
+    </ul>
+
+    <ul class="days">
+        @for (int i = 0; i < StartDayOfWeek; i++)
+        {
+            <li>&nbsp;</li>
+            count++;
+        }
+        @for (int i = 1; i <= LastDayOfMonth; i++)
+        {
+            <li>@i</li>
+            count++;
+        }
+        @for (int i = 0; i < 38 - count; i++)
+        {
+            <li>&nbsp;</li>
+        }
     </ul>
 </div>
 
-<ul class="weekdays">
-    <li>Mo</li>
-    <li>Tu</li>
-    <li>We</li>
-    <li>Th</li>
-    <li>Fr</li>
-    <li>Sa</li>
-    <li>Su</li>
-</ul>
+@code {
+    /// <summary>
+    /// 현재 선택된 날짜(초깃값은 오늘 날짜)
+    /// </summary>
+    public DateTime SelectedData { get; private set; } = DateTime.Today;
 
-<ul class="days">
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-    <li>6</li>
-    <li>7</li>
-    <li>8</li>
-    <li>9</li>
-    <li><span class="active">10</span></li>
-    <li>11</li>
-    ...etc
-</ul>
+    /// <summary>
+    /// 0부터 6까지의 오프셋 값 반환
+    /// </summary>
+    public int StartDayOfWeek
+    {
+        get
+        {
+            return (int)((new DateTime(this.SelectedData.Year, this.SelectedData.Month, 1)).DayOfWeek);
+        }
+    }
+
+    /// <summary>
+    /// 현재 선택된 월의 일수
+    /// </summary>
+    public int LastDayOfMonth
+    {
+        get
+        {
+            return DateTime.DaysInMonth(this.SelectedData.Year, this.SelectedData.Month);
+        }
+    }
+
+    /// <summary>
+    /// 이전 달 1일로 이동
+    /// </summary>
+    protected void PrevMonth()
+    {
+        this.SelectedData = this.SelectedData.AddMonths(-1);
+        this.SelectedData = new DateTime(this.SelectedData.Year, this.SelectedData.Month, 1);
+    }
+
+    /// <summary>
+    /// 다음 달 1일로 이동
+    /// </summary>
+    protected void NextMonth()
+    {
+        this.SelectedData = this.SelectedData.AddMonths(+1);
+        this.SelectedData = new DateTime(this.SelectedData.Year, this.SelectedData.Month, 1);
+    }
+}
