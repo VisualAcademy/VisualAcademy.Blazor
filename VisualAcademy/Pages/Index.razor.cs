@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 using System.Threading.Tasks;
 
 namespace VisualAcademy.Pages
@@ -17,6 +18,14 @@ namespace VisualAcademy.Pages
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await JSRuntime.InvokeAsync<object>("RunCarousel");
+        }
+
+        public DateTime SelectedDate { get; set; } = DateTime.Now;
+
+        protected void OnSelectedDateChanged(DateTime selectedDate)
+        {
+            SelectedDate = selectedDate;
+            // TODO:
         }
     }
 }

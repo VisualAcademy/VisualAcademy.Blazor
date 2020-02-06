@@ -7,7 +7,7 @@
         <ul>
             <li class="prev" @onclick="PrevMonth" style="cursor: pointer;">&#10094;</li>
             <li class="next" @onclick="NextMonth" style="cursor: pointer;">&#10095;</li>
-            <li>@SelectedData.ToString("yyyy년 MM월")</li>
+            <li style="cursor: pointer;" @onclick="@(() => { this.SelectedDate = DateTime.Today; })">@SelectedDate.ToString("yyyy년 MM월")</li>
         </ul>
     </div>
     <ul class="weekdays">
@@ -28,7 +28,8 @@
         }
         @for (int i = 1; i <= LastDayOfMonth; i++)
         {
-            <li>@i</li>
+            var current = this.CurrentDay(i);
+            <li @onclick="() => ChangeSeletecdDate(current.ThisDay)"><span class="@current.Today @current.Active">@i</span></li>
             count++;
         }
         @for (int i = 0; i < 38 - count; i++)
@@ -42,7 +43,7 @@
     /// <summary>
     /// 현재 선택된 날짜(초깃값은 오늘 날짜)
     /// </summary>
-    public DateTime SelectedData { get; private set; } = DateTime.Today;
+    public DateTime SelectedDate { get; private set; } = DateTime.Today;
 
     /// <summary>
     /// 0부터 6까지의 오프셋 값 반환
@@ -51,7 +52,7 @@
     {
         get
         {
-            return (int)((new DateTime(this.SelectedData.Year, this.SelectedData.Month, 1)).DayOfWeek);
+            return (int)((new DateTime(this.SelectedDate.Year, this.SelectedDate.Month, 1)).DayOfWeek);
         }
     }
 
@@ -62,7 +63,7 @@
     {
         get
         {
-            return DateTime.DaysInMonth(this.SelectedData.Year, this.SelectedData.Month);
+            return DateTime.DaysInMonth(this.SelectedDate.Year, this.SelectedDate.Month);
         }
     }
 
@@ -71,8 +72,8 @@
     /// </summary>
     protected void PrevMonth()
     {
-        this.SelectedData = this.SelectedData.AddMonths(-1);
-        this.SelectedData = new DateTime(this.SelectedData.Year, this.SelectedData.Month, 1);
+        this.SelectedDate = this.SelectedDate.AddMonths(-1);
+        this.SelectedDate = new DateTime(this.SelectedDate.Year, this.SelectedDate.Month, 1);
     }
 
     /// <summary>
@@ -80,7 +81,24 @@
     /// </summary>
     protected void NextMonth()
     {
-        this.SelectedData = this.SelectedData.AddMonths(+1);
-        this.SelectedData = new DateTime(this.SelectedData.Year, this.SelectedData.Month, 1);
+        this.SelectedDate = this.SelectedDate.AddMonths(+1);
+        this.SelectedDate = new DateTime(this.SelectedDate.Year, this.SelectedDate.Month, 1);
     }
+
+    protected (DateTime ThisDay, string Today, string Active) CurrentDay(int dayOfMonth)
+    {
+        var thisDay = new DateTime(this.SelectedDate.Year, this.SelectedDate.Month, dayOfMonth);
+        var today = (thisDay.Date == DateTime.Today.Date) ? "today" : null;
+        var active = (thisDay == this.SelectedDate) ? "active" : null;
+        return (thisDay, today, active);
+    }
+
+    protected void ChangeSeletecdDate(DateTime newDate)
+    {
+        this.SelectedDate = newDate;
+
+        OnSelectedDateChanged.InvokeAsync(this.SelectedDate); // 부모에게 전달
+    }
+
+    [Parameter] public EventCallback<DateTime> OnSelectedDateChanged { get; set; }
 }
