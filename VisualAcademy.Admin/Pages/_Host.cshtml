@@ -22,12 +22,13 @@
 
     <!-- Some styling -->
     <link rel="stylesheet" href="_content/ChartJs.Blazor/ChartJSBlazor.css" />
-
     <script src="_content/MatBlazor/dist/matBlazor.js"></script>
 
     <script src="_content/BlazorInputFile/inputfile.js"></script>
 
     <script src="~/js/BlazorSignaturePad.js"></script>
+
+    <link href="/assets/css/blazorreload.css" rel="stylesheet" />
 </head>
 <body id="page-top">
 
@@ -211,6 +212,24 @@
                             </div>
                         </div>
                     </form>
+
+                    <div id="components-reconnect-modal" class="va-recoonect-modal components-reconnect-hide">
+                        <div class="show">
+                            <p>
+                                다시 접속 시도 중...
+                            </p>
+                        </div>
+                        <div class="failed">
+                            <p>
+                                <span onclick="location.reload()" class="btn-link">다시 로드</span>
+                            </p>
+                        </div>
+                        <div class="rejected">
+                            <p>
+                                <span onclick="location.reload()" class="btn-link">다시 로드</span>
+                            </p>
+                        </div>
+                    </div>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
