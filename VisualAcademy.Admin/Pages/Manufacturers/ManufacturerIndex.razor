@@ -39,7 +39,7 @@ else
                 <td>
                     <input type="button" value="Edit" class="btn btn-primary" 
                            data-toggle="modal" data-target="#manufacturerEditorDialog"
-                           @onclick="(() => EditBy(manufacturer))"
+                           @onclick="(_ => EditBy(manufacturer))"
                            />
                 </td>
                 <td>
@@ -61,7 +61,7 @@ else
            class="btn btn-primary" @onclick="(() => btnCreate_Click())" />
 </div>
 
-<ManufacturerDeleteDialog OnClick="btnDelete_Click"></ManufacturerDeleteDialog>
+<ManufacturerDeleteDialog OnClick="HandleDelete"></ManufacturerDeleteDialog>
 
 <ManufacturerEditorForm EditorModel="@manufacturer" SaveOrUpdated="@SaveOrUpdated">
     <EditorFormTitle>@editorFormTitle</EditorFormTitle>
@@ -95,7 +95,7 @@ else
         manufacturers = pagingData.Records.ToList();
     }
 
-    protected async Task btnDelete_Click()
+    protected async Task HandleDelete()
     {
         //await JS.InvokeAsync<object>("alert", "여기까지 왔군요?" + manufacturer.Id + "번을 지울건가요");
         await repository.DeleteManufacturerAsync(manufacturer.Id); // 삭제 
